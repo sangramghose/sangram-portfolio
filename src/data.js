@@ -50,10 +50,12 @@ export const DATA = {
     {title:"Deploytual",tagline:"Deploy intelligence. Any data. Anywhere.",live:true,desc:"An AI-powered analytics platform that unifies data connectivity, natural language querying, automated machine learning, and one-click reporting into a single, deployable engine.",period:"Jun 2026 – Present",preview:"deploytual-preview.png",
       features:[["Natural Language Querying","Ask questions in plain English — AI converts them into SQL or Pandas automatically."],["AutoML Engine","Anomaly detection, time-series forecasting (Prophet), and clustering — zero ML expertise required."],["AI Data Cleaning Studio","Missing value alerts, outlier detection, and one-click fixes."],["Explainable AI + Storyteller","Every answer reveals the exact code. Built-in text-to-speech reads insights aloud."],["One-Click Executive Reports","Boardroom-ready PDFs with AI-written summaries, charts, and forecasts."],["End-to-End Pipeline Builder","Turn plain-English commands into fully automated ETL → ML → Report workflows."]],
       stack:["Python","FastAPI","Pandas","scikit-learn","Prophet","Docker","Kubernetes","Helm","CI/CD"],
+      techStack:["Python","FastAPI","Pandas","scikit-learn","Prophet","Docker","Kubernetes","Helm","CI/CD"],
       actions:[["Live Demo","https://deploytual.netlify.app/",1],["GitHub","https://github.com/sangramghose/Deploytual",0],["API Docs","https://deploytual.onrender.com/docs",0]]},
     {title:"WorkforceIQ",tagline:"Workforce Analytics Platform",live:false,desc:"End-to-end analytics pipeline ingesting 50K+ employee records and 10K call transcripts with attrition prediction, clustering, and sentiment analysis.",period:"Jan 2026 – May 2026",preview:null,
       features:[["Attrition Prediction","Random Forest on 50K records achieving 85%+ accuracy."],["Employee Segmentation","K-Means clustering revealed 4 behavioral personas including a high-risk segment."],["Call Sentiment Analysis","VADER scoring of 10K transcripts with ~92% label agreement."],["Interactive Dashboards","Tableau + self-contained Plotly HTML dashboards."],["Automated Reporting","Power Automate cut manual HR reporting turnaround by 60%."],["Modular Pipeline","Every stage writes to disk — independent and re-runnable."]],
       stack:["Python","Pandas","Scikit-learn","NLTK","Tableau","Plotly","Power Automate"],
+      techStack:["Python","Pandas","Scikit-learn","NLTK","Tableau","Plotly","Power Automate"],
       actions:[["View on GitHub","https://github.com/sangramghose/Workforce-and-Industry-Trend-Analyzer",1]]}
   ],
   cert: [
@@ -66,6 +68,24 @@ export const DATA = {
     {issuer:"Altair (RapidMiner)",title:"Data Engineering Professional",desc:"Data access, transformations, multi-dataset workflows, and data processing.",meta:"Aug 2025",badge:"data-eng-badge.png",skills:["Data Access","Transformation"],href:"https://openbadgefactory.com/obv3/credentials/2ff63de886d187a4ff7a27ae751c75f6ab3656ff",span:"span-12"}
   ]
 };
+
+export const TESTIMONIALS = [
+  {
+    quote: "Sangram is a dedicated data professional with exceptional analytical skills. His contributions significantly improved our forecasting models.",
+    name: "Jane Doe",
+    role: "Senior Data Scientist"
+  },
+  {
+    quote: "A fast learner and a great team player. Sangram consistently delivered high-quality work during his internship.",
+    name: "John Smith",
+    role: "Engineering Manager"
+  },
+  {
+    quote: "His ability to turn complex data into actionable insights is impressive. Highly recommended for any data role.",
+    name: "Alice Johnson",
+    role: "Product Lead"
+  }
+];
 
 export const ICONS = {
   building:'<path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"/>',
