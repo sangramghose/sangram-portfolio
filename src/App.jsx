@@ -199,10 +199,11 @@ const Nav = () => {
   );
 };
 
-// Animation wrapper – now accepts className to apply grid span classes
-const Reveal = ({ children, delay = 0, className = '' }) => (
+// Animation wrapper – now accepts className and style to apply grid span classes and sizing
+const Reveal = ({ children, delay = 0, className = '', style = {} }) => (
   <motion.div
     className={className}
+    style={style}
     initial={{ opacity: 0, y: 30 }}
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true, margin: "-40px" }}
@@ -220,7 +221,7 @@ const Hero = () => {
     <section id="home" className="hero">
       <div className="bento">
         <Reveal className="span-8">
-          <div className="tile tile-glow" style={{ padding: '42px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+          <div className="tile tile-glow" style={{ padding: '42px', display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '100%' }}>
             <div className="hero-badge">
               <span className="pulse"></span>
               Open to Internship / Full-time
@@ -241,8 +242,8 @@ const Hero = () => {
           </div>
         </Reveal>
 
-        <Reveal className="span-4" delay={0.1}>
-          <div className="tile portrait">
+        <Reveal className="span-4" delay={0.1} style={{ height: '100%' }}>
+          <div className="tile portrait" style={{ height: '100%' }}>
             <img src="/profile.png" alt="Sangram Keshari Ghose — Data Engineer" width="640" height="800" />
             <div className="portrait-overlay"></div>
             <div className="portrait-cap">
@@ -255,7 +256,7 @@ const Hero = () => {
         </Reveal>
 
         <Reveal className="span-3" delay={0.2}>
-          <div className="tile" style={{ padding: '24px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+          <div className="tile" style={{ padding: '24px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%' }}>
             <div className="metric-label">Metric</div>
             <div>
               <div className="metric-val"><Counter value={3} /></div>
@@ -264,7 +265,7 @@ const Hero = () => {
           </div>
         </Reveal>
         <Reveal className="span-3" delay={0.3}>
-          <div className="tile" style={{ padding: '24px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', background: 'var(--elevated)', borderColor: 'var(--border-strong)' }}>
+          <div className="tile" style={{ padding: '24px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', background: 'var(--elevated)', borderColor: 'var(--border-strong)', height: '100%' }}>
             <div className="metric-label">Metric</div>
             <div>
               <div className="metric-val"><Counter value={7} /></div>
@@ -273,7 +274,7 @@ const Hero = () => {
           </div>
         </Reveal>
         <Reveal className="span-3" delay={0.4}>
-          <div className="tile" style={{ padding: '24px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+          <div className="tile" style={{ padding: '24px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%' }}>
             <div className="metric-label">Metric</div>
             <div>
               <div className="metric-val"><Counter value={10} suffix="+" /></div>
@@ -282,7 +283,7 @@ const Hero = () => {
           </div>
         </Reveal>
         <Reveal className="span-3" delay={0.5}>
-          <div className="tile" style={{ padding: '24px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+          <div className="tile" style={{ padding: '24px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%' }}>
             <div className="metric-label">Metric</div>
             <div>
               <div className="metric-val text-grad">∞</div>
@@ -321,7 +322,7 @@ const Highlights = () => (
     <div className="bento" style={{ marginTop: '28px' }}>
       {DATA.highlights.map((h, i) => (
         <Reveal key={i} className={h.span} delay={i * 0.05}>
-          <div className="tile" style={{ padding: '28px', display: 'flex', flexDirection: 'column' }}>
+          <div className="tile" style={{ padding: '28px', display: 'flex', flexDirection: 'column', height: '100%' }}>
             <div className="icon-box"><Icon name={h.icon} /></div>
             <h3 style={{ fontSize: '1.3rem', marginTop: '18px', letterSpacing: '-0.025em' }}>{h.title}</h3>
             <p className="muted" style={{ fontSize: '.9rem', margin: '10px 0 16px', flex: 1, lineHeight: '1.72' }}>{h.body}</p>
@@ -348,12 +349,12 @@ const About = () => (
     <div className="sec-rule"></div>
     <div className="bento" style={{ marginTop: '28px' }}>
       <Reveal className="span-7">
-        <div className="tile" style={{ padding: '34px' }}>
+        <div className="tile" style={{ padding: '34px', height: '100%' }}>
           {DATA.about.map((p, i) => <p key={i} className="muted" style={{ fontSize: '.96rem', margin: '0 0 16px', lineHeight: '1.78' }} dangerouslySetInnerHTML={{ __html: p }} />)}
         </div>
       </Reveal>
       <Reveal className="span-5" delay={0.1}>
-        <div className="tile" style={{ padding: '34px' }}>
+        <div className="tile" style={{ padding: '34px', height: '100%' }}>
           <div className="mono">Tech I love</div>
           <div style={{ marginTop: '14px', display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
             {DATA.loved.map((t, i) => <Pill key={i} accent>{t}</Pill>)}
@@ -400,7 +401,7 @@ const Skills = () => (
     <div className="bento" style={{ marginTop: '28px' }}>
       {DATA.skills.map((s, i) => (
         <Reveal key={i} className={s.span} delay={i * 0.05}>
-          <div className="tile" style={{ padding: '28px' }}>
+          <div className="tile" style={{ padding: '28px', height: '100%' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
               <div className="icon-box"><Icon name={s.icon} /></div>
               <h3 style={{ fontSize: '1.15rem', letterSpacing: '-0.02em' }}>{s.title}</h3>
@@ -431,7 +432,7 @@ const Experience = () => (
     <div className="bento" style={{ marginTop: '28px' }}>
       {DATA.exp.map((e, i) => (
         <Reveal key={i} className={e.full ? 'span-12' : 'span-6'} delay={i * 0.05}>
-          <div className="tile" style={{ padding: '28px' }}>
+          <div className="tile" style={{ padding: '28px', height: '100%' }}>
             <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'flex-start', justifyContent: 'space-between', gap: '16px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
                 <img className="exp-logo" src={`/${e.logo}`} alt={`${e.company} logo`} onError={(ev) => { ev.target.style.display = 'none'; ev.target.nextSibling.style.display = 'grid'; }} />
@@ -477,7 +478,7 @@ const Projects = () => (
         <Reveal key={i} delay={i * 0.05}>
           <div className="bento">
             <Reveal className="span-5">
-              <div className="tile tile-glow" style={{ padding: '34px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+              <div className="tile tile-glow" style={{ padding: '34px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%' }}>
                 <div>
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
                     <Pill accent>{p.tagline}</Pill>
@@ -497,7 +498,7 @@ const Projects = () => (
             <div className="span-7" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
               {p.features.map(([title, body], idx) => (
                 <Reveal key={idx} delay={idx * 0.05}>
-                  <div className="tile" style={{ padding: '20px' }}>
+                  <div className="tile" style={{ padding: '20px', height: '100%' }}>
                     <h4 style={{ fontSize: '1rem', letterSpacing: '-0.02em' }}>{title}</h4>
                     <p className="muted" style={{ fontSize: '.85rem', marginTop: '8px', lineHeight: '1.65' }}>{body}</p>
                   </div>
@@ -537,7 +538,7 @@ const Education = () => (
     <div className="sec-rule"></div>
     <div className="bento" style={{ marginTop: '28px' }}>
       <Reveal className="span-8">
-        <div className="tile" style={{ padding: '34px', display: 'flex', flexWrap: 'wrap', gap: '20px', alignItems: 'flex-start' }}>
+        <div className="tile" style={{ padding: '34px', display: 'flex', flexWrap: 'wrap', gap: '20px', alignItems: 'flex-start', height: '100%' }}>
           <img src="/giet-logo.png" alt="GIET University logo" style={{ width: '56px', height: '56px', borderRadius: '14px', objectFit: 'contain', background: '#fff', padding: '6px', border: '1px solid var(--border)' }} onError={(e) => e.target.remove()} />
           <div style={{ flex: 1, minWidth: '200px' }}>
             <h3 style={{ fontSize: '1.25rem', letterSpacing: '-0.025em' }}>B.Tech, Computer Science and Engineering</h3>
@@ -547,7 +548,7 @@ const Education = () => (
         </div>
       </Reveal>
       <Reveal className="span-4" delay={0.1}>
-        <div className="tile" style={{ padding: '34px', background: 'var(--elevated)', borderColor: 'var(--border-strong)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+        <div className="tile" style={{ padding: '34px', background: 'var(--elevated)', borderColor: 'var(--border-strong)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%' }}>
           <div className="mono">Timeline</div>
           <div style={{ marginTop: '20px' }}>
             <div style={{ fontFamily: 'Syne', fontSize: '1.55rem', fontWeight: '800', letterSpacing: '-0.025em' }}>Aug 2023 – Present</div>
@@ -575,7 +576,7 @@ const Certifications = () => (
     <div className="bento" style={{ marginTop: '28px' }}>
       {DATA.cert.map((c, i) => (
         <Reveal key={i} className={c.span} delay={i * 0.05}>
-          <a className={`tile tile-link`} href={c.href} target="_blank" rel="noopener" style={{ padding: '24px' }}>
+          <a className="tile tile-link" href={c.href} target="_blank" rel="noopener" style={{ padding: '24px', height: '100%' }}>
             <img className="cert-badge" src={`/${c.badge}`} alt={`${c.title} certification badge`} onError={(e) => e.target.remove()} />
             <div className="mono">{c.issuer}</div>
             <h3 style={{ fontSize: '1.1rem', marginTop: '8px', letterSpacing: '-0.02em' }}>{c.title}</h3>
