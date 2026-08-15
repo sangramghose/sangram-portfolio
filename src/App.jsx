@@ -113,12 +113,25 @@ const Counter = ({ value, suffix = '' }) => {
   return <span ref={ref}>{display}{suffix}</span>;
 };
 
-// Nav component with mobile menu
+// Nav component with mobile menu and icons
 const Nav = () => {
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState('home');
   const [mobileOpen, setMobileOpen] = useState(false);
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'dark');
+
+  // mapping nav id to icon name
+  const navIcons = {
+    home: 'home',
+    highlights: 'rocket',
+    about: 'user',
+    skills: 'settings',
+    experience: 'briefcase',
+    projects: 'code',
+    education: 'education',
+    certifications: 'award',
+    contact: 'contact'
+  };
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
@@ -150,6 +163,7 @@ const Nav = () => {
         <nav className="links" aria-label="Primary">
           {DATA.nav.map(([id, label]) => (
             <a key={id} href={`#${id}`} className={active === id ? 'active' : ''}>
+              <span className="nav-icon"><Icon name={navIcons[id]} size={16} /></span>
               {label}
             </a>
           ))}
@@ -188,6 +202,7 @@ const Nav = () => {
                   className={active === id ? 'active' : ''}
                   onClick={() => setMobileOpen(false)}
                 >
+                  <span className="nav-icon"><Icon name={navIcons[id]} size={18} /></span>
                   {label}
                 </a>
               ))}
@@ -199,7 +214,7 @@ const Nav = () => {
   );
 };
 
-// Animation wrapper – now accepts className and style to apply grid span classes and sizing
+// Animation wrapper – accepts className and style for grid
 const Reveal = ({ children, delay = 0, className = '', style = {} }) => (
   <motion.div
     className={className}
