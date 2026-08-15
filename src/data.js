@@ -1,6 +1,5 @@
 // Single source of truth for all portfolio content.
-// Swap ASSET_BASE to "/" once the images are served from your own deploy.
-export const ASSET_BASE = "https://sangram.qzz.io/";
+export const ASSET_BASE = "/";
 
 export const PROFILE = {
   first: "Sangram",
