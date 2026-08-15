@@ -1,0 +1,21 @@
+{
+  "name": "Sangram Keshari Ghose Portfolio",
+  "short_name": "SKG Portfolio",
+  "description": "Data Engineer & Analytics professional portfolio",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#07070f",
+  "theme_color": "#07070f",
+  "icons": [
+    {
+      "src": "/profile.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/profile.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
