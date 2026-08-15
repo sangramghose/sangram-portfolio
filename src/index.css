@@ -237,6 +237,8 @@ nav.links a {
   letter-spacing: 0.015em;
   transition: color 0.2s, background 0.2s, box-shadow 0.2s;
   white-space: nowrap;
+  display: flex;
+  align-items: center;
 }
 
 nav.links a:hover {
@@ -272,7 +274,6 @@ nav.links a.active {
 .iconbtn:hover {
   border-color: rgba(99, 102, 241, 0.5);
   background: rgba(99, 102, 241, 0.16);
-  transform: translateY(-1px);
 }
 
 [data-theme="light"] .iconbtn {
@@ -811,6 +812,8 @@ footer {
   font-weight: 500;
   color: var(--muted);
   transition: background 0.2s, color 0.2s;
+  display: flex;
+  align-items: center;
 }
 
 .mobile-links a:hover {
@@ -847,4 +850,73 @@ nav.links a,
 .mobile-links a {
   display: flex;
   align-items: center;
+}
+
+/* ===== Scroll Progress Bar ===== */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--grad);
+  transform-origin: 0 50%;
+  z-index: 999;
+}
+
+/* ===== Scroll-to-top button ===== */
+.scroll-to-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: var(--grad);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 8px 24px rgba(99, 102, 241, 0.5);
+  z-index: 90;
+}
+
+/* ===== Side Dot Navigation ===== */
+.side-dots {
+  position: fixed;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 80;
+}
+
+.side-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--muted);
+  opacity: 0.4;
+  transition: opacity 0.3s, background 0.3s, transform 0.3s;
+  cursor: pointer;
+}
+
+.side-dot:hover {
+  opacity: 0.8;
+}
+
+.side-dot.active {
+  background: var(--primary);
+  opacity: 1;
+  transform: scale(1.4);
+}
+
+/* Hide side dots on mobile */
+@media (max-width: 960px) {
+  .side-dots {
+    display: none;
+  }
 }
