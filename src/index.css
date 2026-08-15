@@ -835,3 +835,16 @@ footer {
     display: none;
   }
 }
+
+/* ===== Navigation Icons ===== */
+.nav-icon {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 6px;
+}
+
+nav.links a,
+.mobile-links a {
+  display: flex;
+  align-items: center;
+}
