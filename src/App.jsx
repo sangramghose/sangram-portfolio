@@ -199,9 +199,10 @@ const Nav = () => {
   );
 };
 
-// Animation wrapper
-const Reveal = ({ children, delay = 0 }) => (
+// Animation wrapper – now accepts className to apply grid span classes
+const Reveal = ({ children, delay = 0, className = '' }) => (
   <motion.div
+    className={className}
     initial={{ opacity: 0, y: 30 }}
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true, margin: "-40px" }}
@@ -218,8 +219,8 @@ const Hero = () => {
   return (
     <section id="home" className="hero">
       <div className="bento">
-        <Reveal>
-          <div className="tile tile-glow span-8" style={{ padding: '42px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+        <Reveal className="span-8">
+          <div className="tile tile-glow" style={{ padding: '42px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
             <div className="hero-badge">
               <span className="pulse"></span>
               Open to Internship / Full-time
@@ -240,8 +241,8 @@ const Hero = () => {
           </div>
         </Reveal>
 
-        <Reveal delay={0.1}>
-          <div className="tile span-4 portrait">
+        <Reveal className="span-4" delay={0.1}>
+          <div className="tile portrait">
             <img src="/profile.png" alt="Sangram Keshari Ghose — Data Engineer" width="640" height="800" />
             <div className="portrait-overlay"></div>
             <div className="portrait-cap">
@@ -253,8 +254,8 @@ const Hero = () => {
           </div>
         </Reveal>
 
-        <Reveal delay={0.2}>
-          <div className="tile span-3" style={{ padding: '24px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+        <Reveal className="span-3" delay={0.2}>
+          <div className="tile" style={{ padding: '24px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
             <div className="metric-label">Metric</div>
             <div>
               <div className="metric-val"><Counter value={3} /></div>
@@ -262,8 +263,8 @@ const Hero = () => {
             </div>
           </div>
         </Reveal>
-        <Reveal delay={0.3}>
-          <div className="tile span-3" style={{ padding: '24px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', background: 'var(--elevated)', borderColor: 'var(--border-strong)' }}>
+        <Reveal className="span-3" delay={0.3}>
+          <div className="tile" style={{ padding: '24px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', background: 'var(--elevated)', borderColor: 'var(--border-strong)' }}>
             <div className="metric-label">Metric</div>
             <div>
               <div className="metric-val"><Counter value={7} /></div>
@@ -271,8 +272,8 @@ const Hero = () => {
             </div>
           </div>
         </Reveal>
-        <Reveal delay={0.4}>
-          <div className="tile span-3" style={{ padding: '24px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+        <Reveal className="span-3" delay={0.4}>
+          <div className="tile" style={{ padding: '24px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
             <div className="metric-label">Metric</div>
             <div>
               <div className="metric-val"><Counter value={10} suffix="+" /></div>
@@ -280,8 +281,8 @@ const Hero = () => {
             </div>
           </div>
         </Reveal>
-        <Reveal delay={0.5}>
-          <div className="tile span-3" style={{ padding: '24px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+        <Reveal className="span-3" delay={0.5}>
+          <div className="tile" style={{ padding: '24px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
             <div className="metric-label">Metric</div>
             <div>
               <div className="metric-val text-grad">∞</div>
@@ -290,8 +291,8 @@ const Hero = () => {
           </div>
         </Reveal>
 
-        <Reveal delay={0.6}>
-          <div className="tile span-12" style={{ padding: '16px' }}>
+        <Reveal className="span-12" delay={0.6}>
+          <div className="tile" style={{ padding: '16px' }}>
             <div className="marquee-wrap">
               <div className="marquee-track">
                 {[...DATA.tech, ...DATA.tech].map((t, i) => <span key={i}>{t}</span>)}
@@ -319,8 +320,8 @@ const Highlights = () => (
     <div className="sec-rule"></div>
     <div className="bento" style={{ marginTop: '28px' }}>
       {DATA.highlights.map((h, i) => (
-        <Reveal key={i} delay={i * 0.05}>
-          <div className={`tile ${h.span}`} style={{ padding: '28px', display: 'flex', flexDirection: 'column' }}>
+        <Reveal key={i} className={h.span} delay={i * 0.05}>
+          <div className="tile" style={{ padding: '28px', display: 'flex', flexDirection: 'column' }}>
             <div className="icon-box"><Icon name={h.icon} /></div>
             <h3 style={{ fontSize: '1.3rem', marginTop: '18px', letterSpacing: '-0.025em' }}>{h.title}</h3>
             <p className="muted" style={{ fontSize: '.9rem', margin: '10px 0 16px', flex: 1, lineHeight: '1.72' }}>{h.body}</p>
@@ -346,13 +347,13 @@ const About = () => (
     </Reveal>
     <div className="sec-rule"></div>
     <div className="bento" style={{ marginTop: '28px' }}>
-      <Reveal>
-        <div className="tile span-7" style={{ padding: '34px' }}>
+      <Reveal className="span-7">
+        <div className="tile" style={{ padding: '34px' }}>
           {DATA.about.map((p, i) => <p key={i} className="muted" style={{ fontSize: '.96rem', margin: '0 0 16px', lineHeight: '1.78' }} dangerouslySetInnerHTML={{ __html: p }} />)}
         </div>
       </Reveal>
-      <Reveal delay={0.1}>
-        <div className="tile span-5" style={{ padding: '34px' }}>
+      <Reveal className="span-5" delay={0.1}>
+        <div className="tile" style={{ padding: '34px' }}>
           <div className="mono">Tech I love</div>
           <div style={{ marginTop: '14px', display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
             {DATA.loved.map((t, i) => <Pill key={i} accent>{t}</Pill>)}
@@ -370,8 +371,8 @@ const About = () => (
           </div>
         </div>
       </Reveal>
-      <Reveal delay={0.2}>
-        <div className="tile span-12" style={{ padding: '24px 34px', display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '16px', background: 'var(--elevated)', borderColor: 'var(--border-strong)' }}>
+      <Reveal className="span-12" delay={0.2}>
+        <div className="tile" style={{ padding: '24px 34px', display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '16px', background: 'var(--elevated)', borderColor: 'var(--border-strong)' }}>
           <div>
             <div className="mono">Direct line</div>
             <div style={{ fontFamily: 'Syne', fontWeight: '800', fontSize: '1.22rem', marginTop: '6px', letterSpacing: '-0.025em' }}>sangramkesharighose@gmail.com</div>
@@ -398,8 +399,8 @@ const Skills = () => (
     <div className="sec-rule"></div>
     <div className="bento" style={{ marginTop: '28px' }}>
       {DATA.skills.map((s, i) => (
-        <Reveal key={i} delay={i * 0.05}>
-          <div className={`tile ${s.span}`} style={{ padding: '28px' }}>
+        <Reveal key={i} className={s.span} delay={i * 0.05}>
+          <div className="tile" style={{ padding: '28px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
               <div className="icon-box"><Icon name={s.icon} /></div>
               <h3 style={{ fontSize: '1.15rem', letterSpacing: '-0.02em' }}>{s.title}</h3>
@@ -429,8 +430,8 @@ const Experience = () => (
     <div className="sec-rule"></div>
     <div className="bento" style={{ marginTop: '28px' }}>
       {DATA.exp.map((e, i) => (
-        <Reveal key={i} delay={i * 0.05}>
-          <div className={`tile ${e.full ? 'span-12' : 'span-6'}`} style={{ padding: '28px' }}>
+        <Reveal key={i} className={e.full ? 'span-12' : 'span-6'} delay={i * 0.05}>
+          <div className="tile" style={{ padding: '28px' }}>
             <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'flex-start', justifyContent: 'space-between', gap: '16px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
                 <img className="exp-logo" src={`/${e.logo}`} alt={`${e.company} logo`} onError={(ev) => { ev.target.style.display = 'none'; ev.target.nextSibling.style.display = 'grid'; }} />
@@ -475,22 +476,24 @@ const Projects = () => (
       {DATA.proj.map((p, i) => (
         <Reveal key={i} delay={i * 0.05}>
           <div className="bento">
-            <div className="tile tile-glow span-5" style={{ padding: '34px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-              <div>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-                  <Pill accent>{p.tagline}</Pill>
-                  {p.live && <Pill accent>Live</Pill>}
+            <Reveal className="span-5">
+              <div className="tile tile-glow" style={{ padding: '34px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                <div>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                    <Pill accent>{p.tagline}</Pill>
+                    {p.live && <Pill accent>Live</Pill>}
+                  </div>
+                  <h3 style={{ fontSize: '1.95rem', marginTop: '16px', letterSpacing: '-0.03em' }}>{p.title}</h3>
+                  <p className="muted" style={{ fontSize: '.9rem', marginTop: '12px', lineHeight: '1.72' }}>{p.desc}</p>
+                  <div className="mono" style={{ marginTop: '16px' }}>{p.period}</div>
                 </div>
-                <h3 style={{ fontSize: '1.95rem', marginTop: '16px', letterSpacing: '-0.03em' }}>{p.title}</h3>
-                <p className="muted" style={{ fontSize: '.9rem', marginTop: '12px', lineHeight: '1.72' }}>{p.desc}</p>
-                <div className="mono" style={{ marginTop: '16px' }}>{p.period}</div>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', marginTop: '24px' }}>
+                  {p.actions.map(([label, href, primary], idx) => (
+                    <a key={idx} className={`btn ${primary ? 'btn-primary' : 'btn-ghost'}`} href={href} target="_blank" rel="noopener">{label}</a>
+                  ))}
+                </div>
               </div>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', marginTop: '24px' }}>
-                {p.actions.map(([label, href, primary], idx) => (
-                  <a key={idx} className={`btn ${primary ? 'btn-primary' : 'btn-ghost'}`} href={href} target="_blank" rel="noopener">{label}</a>
-                ))}
-              </div>
-            </div>
+            </Reveal>
             <div className="span-7" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
               {p.features.map(([title, body], idx) => (
                 <Reveal key={idx} delay={idx * 0.05}>
@@ -502,14 +505,14 @@ const Projects = () => (
               ))}
             </div>
             {p.preview && (
-              <Reveal>
-                <div className="tile span-12 project-preview" style={{ padding: '0' }}>
+              <Reveal className="span-12">
+                <div className="tile project-preview" style={{ padding: '0' }}>
                   <img src={`/${p.preview}`} alt={`${p.title} project preview`} loading="lazy" onError={(e) => e.target.closest('.project-preview').remove()} />
                 </div>
               </Reveal>
             )}
-            <Reveal>
-              <div className="tile span-12" style={{ padding: '20px 28px', display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+            <Reveal className="span-12">
+              <div className="tile" style={{ padding: '20px 28px', display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
                 {p.stack.map((t, idx) => <Pill key={idx}>{t}</Pill>)}
               </div>
             </Reveal>
@@ -533,8 +536,8 @@ const Education = () => (
     </Reveal>
     <div className="sec-rule"></div>
     <div className="bento" style={{ marginTop: '28px' }}>
-      <Reveal>
-        <div className="tile span-8" style={{ padding: '34px', display: 'flex', flexWrap: 'wrap', gap: '20px', alignItems: 'flex-start' }}>
+      <Reveal className="span-8">
+        <div className="tile" style={{ padding: '34px', display: 'flex', flexWrap: 'wrap', gap: '20px', alignItems: 'flex-start' }}>
           <img src="/giet-logo.png" alt="GIET University logo" style={{ width: '56px', height: '56px', borderRadius: '14px', objectFit: 'contain', background: '#fff', padding: '6px', border: '1px solid var(--border)' }} onError={(e) => e.target.remove()} />
           <div style={{ flex: 1, minWidth: '200px' }}>
             <h3 style={{ fontSize: '1.25rem', letterSpacing: '-0.025em' }}>B.Tech, Computer Science and Engineering</h3>
@@ -543,8 +546,8 @@ const Education = () => (
           </div>
         </div>
       </Reveal>
-      <Reveal delay={0.1}>
-        <div className="tile span-4" style={{ padding: '34px', background: 'var(--elevated)', borderColor: 'var(--border-strong)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+      <Reveal className="span-4" delay={0.1}>
+        <div className="tile" style={{ padding: '34px', background: 'var(--elevated)', borderColor: 'var(--border-strong)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
           <div className="mono">Timeline</div>
           <div style={{ marginTop: '20px' }}>
             <div style={{ fontFamily: 'Syne', fontSize: '1.55rem', fontWeight: '800', letterSpacing: '-0.025em' }}>Aug 2023 – Present</div>
@@ -571,8 +574,8 @@ const Certifications = () => (
     <div className="sec-rule"></div>
     <div className="bento" style={{ marginTop: '28px' }}>
       {DATA.cert.map((c, i) => (
-        <Reveal key={i} delay={i * 0.05}>
-          <a className={`tile tile-link ${c.span}`} href={c.href} target="_blank" rel="noopener" style={{ padding: '24px' }}>
+        <Reveal key={i} className={c.span} delay={i * 0.05}>
+          <a className={`tile tile-link`} href={c.href} target="_blank" rel="noopener" style={{ padding: '24px' }}>
             <img className="cert-badge" src={`/${c.badge}`} alt={`${c.title} certification badge`} onError={(e) => e.target.remove()} />
             <div className="mono">{c.issuer}</div>
             <h3 style={{ fontSize: '1.1rem', marginTop: '8px', letterSpacing: '-0.02em' }}>{c.title}</h3>
@@ -602,8 +605,8 @@ const Contact = () => (
     </Reveal>
     <div className="sec-rule"></div>
     <div className="bento" style={{ marginTop: '28px' }}>
-      <Reveal>
-        <div className="tile span-12" style={{ padding: '34px', display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '20px', background: 'var(--primary)', borderColor: 'var(--primary)', color: '#fff' }}>
+      <Reveal className="span-12">
+        <div className="tile" style={{ padding: '34px', display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '20px', background: 'var(--primary)', borderColor: 'var(--primary)', color: '#fff' }}>
           <div>
             <h3 style={{ fontSize: '1.6rem', color: '#fff', letterSpacing: '-0.025em' }}>Open for collaboration</h3>
             <p style={{ margin: '6px 0 0', opacity: '.9', fontSize: '1.02rem' }}>Let's build something scalable.</p>
@@ -612,8 +615,8 @@ const Contact = () => (
         </div>
       </Reveal>
 
-      <Reveal>
-        <a className="tile span-3" style={{ padding: '26px', display: 'flex', flexDirection: 'column', minHeight: '148px' }} href="mailto:sangramkesharighose@gmail.com">
+      <Reveal className="span-3">
+        <a className="tile" style={{ padding: '26px', display: 'flex', flexDirection: 'column', minHeight: '148px' }} href="mailto:sangramkesharighose@gmail.com">
           <div className="contact-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
           </div>
@@ -622,8 +625,8 @@ const Contact = () => (
         </a>
       </Reveal>
 
-      <Reveal delay={0.05}>
-        <a className="tile span-3" style={{ padding: '26px', display: 'flex', flexDirection: 'column', minHeight: '148px' }} href="tel:+918456841232">
+      <Reveal className="span-3" delay={0.05}>
+        <a className="tile" style={{ padding: '26px', display: 'flex', flexDirection: 'column', minHeight: '148px' }} href="tel:+918456841232">
           <div className="contact-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
           </div>
@@ -632,8 +635,8 @@ const Contact = () => (
         </a>
       </Reveal>
 
-      <Reveal delay={0.1}>
-        <a className="tile span-3" style={{ padding: '26px', display: 'flex', flexDirection: 'column', minHeight: '148px' }} href="https://github.com/sangramghose" target="_blank" rel="noopener">
+      <Reveal className="span-3" delay={0.1}>
+        <a className="tile" style={{ padding: '26px', display: 'flex', flexDirection: 'column', minHeight: '148px' }} href="https://github.com/sangramghose" target="_blank" rel="noopener">
           <div className="contact-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
           </div>
@@ -642,8 +645,8 @@ const Contact = () => (
         </a>
       </Reveal>
 
-      <Reveal delay={0.15}>
-        <a className="tile span-3" style={{ padding: '26px', display: 'flex', flexDirection: 'column', minHeight: '148px' }} href="https://www.linkedin.com/in/sangramghose/" target="_blank" rel="noopener">
+      <Reveal className="span-3" delay={0.15}>
+        <a className="tile" style={{ padding: '26px', display: 'flex', flexDirection: 'column', minHeight: '148px' }} href="https://www.linkedin.com/in/sangramghose/" target="_blank" rel="noopener">
           <div className="contact-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
           </div>
