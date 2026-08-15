@@ -113,12 +113,33 @@ const Counter = ({ value, suffix = '' }) => {
   return <span ref={ref}>{display}{suffix}</span>;
 };
 
-// Nav component with mobile menu and icons
+// Custom hook to track active section
+const useActiveSection = () => {
+  const [active, setActive] = useState('home');
+  useEffect(() => {
+    const sections = DATA.nav.map(([id]) => document.getElementById(id)).filter(Boolean);
+    const onScroll = () => {
+      let current = sections[0]?.id || 'home';
+      sections.forEach((sec) => {
+        if (sec && sec.getBoundingClientRect().top <= innerHeight * 0.32) {
+          current = sec.id;
+        }
+      });
+      setActive(current);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll(); // initial
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+  return active;
+};
+
+// Nav component with mobile menu, icons, and theme micro-interaction
 const Nav = () => {
   const [scrolled, setScrolled] = useState(false);
-  const [active, setActive] = useState('home');
   const [mobileOpen, setMobileOpen] = useState(false);
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'dark');
+  const active = useActiveSection();
 
   // mapping nav id to icon name
   const navIcons = {
@@ -139,17 +160,7 @@ const Nav = () => {
   }, [theme]);
 
   useEffect(() => {
-    const onScroll = () => {
-      setScrolled(window.scrollY > 40);
-      const secs = DATA.nav.map(([id]) => document.getElementById(id));
-      let current = secs[0]?.id;
-      secs.forEach((sec) => {
-        if (sec && sec.getBoundingClientRect().top <= innerHeight * 0.32) {
-          current = sec.id;
-        }
-      });
-      setActive(current);
-    };
+    const onScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
@@ -169,13 +180,26 @@ const Nav = () => {
           ))}
         </nav>
         <div className="nav-actions">
-          <button className="iconbtn" onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-                  aria-label="Toggle theme" title="Toggle theme">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <circle cx="12" cy="12" r="5"/>
-              <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
-            </svg>
-          </button>
+          <motion.button
+            className="iconbtn"
+            whileTap={{ scale: 0.88 }}
+            whileHover={{ y: -2 }}
+            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+            aria-label="Toggle theme"
+            title="Toggle theme"
+          >
+            <motion.span
+              key={theme}
+              initial={{ rotate: 0 }}
+              animate={{ rotate: 360 }}
+              transition={{ duration: 0.5 }}
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <circle cx="12" cy="12" r="5"/>
+                <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+              </svg>
+            </motion.span>
+          </motion.button>
           <a className="btn-nav-cta" href="#contact">Get in touch</a>
           <button className="hamburger" onClick={toggleMobile} aria-label="Toggle mobile menu">
             <span className={`bar ${mobileOpen ? 'open' : ''}`}></span>
@@ -211,6 +235,77 @@ const Nav = () => {
         )}
       </AnimatePresence>
     </header>
+  );
+};
+
+// Scroll progress bar
+const ScrollProgress = () => {
+  const [progress, setProgress] = useState(0);
+  useEffect(() => {
+    const onScroll = () => {
+      const total = document.documentElement.scrollHeight - window.innerHeight;
+      const current = window.scrollY;
+      setProgress((current / total) * 100);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+  return (
+    <motion.div
+      className="scroll-progress"
+      style={{ scaleX: progress / 100 }}
+      initial={{ scaleX: 0 }}
+      animate={{ scaleX: progress / 100 }}
+      transition={{ duration: 0.2 }}
+    />
+  );
+};
+
+// Scroll-to-top button
+const ScrollToTop = () => {
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setVisible(window.scrollY > 400);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+  return (
+    <AnimatePresence>
+      {visible && (
+        <motion.button
+          className="scroll-to-top"
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.5 }}
+          whileHover={{ y: -3 }}
+          whileTap={{ scale: 0.9 }}
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          aria-label="Scroll to top"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M12 19V5M5 12l7-7 7 7"/>
+          </svg>
+        </motion.button>
+      )}
+    </AnimatePresence>
+  );
+};
+
+// Side dot navigation
+const SideDots = () => {
+  const active = useActiveSection();
+  return (
+    <div className="side-dots">
+      {DATA.nav.map(([id]) => (
+        <a
+          key={id}
+          href={`#${id}`}
+          className={`side-dot ${active === id ? 'active' : ''}`}
+          aria-label={`Navigate to ${id}`}
+        />
+      ))}
+    </div>
   );
 };
 
@@ -692,7 +787,10 @@ export default function App() {
       <div className="orb orb-2" aria-hidden="true"></div>
       <div className="orb orb-3" aria-hidden="true"></div>
 
+      <ScrollProgress />
       <Nav />
+      <SideDots />
+      <ScrollToTop />
 
       <main className="wrap">
         <Hero />
